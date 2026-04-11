@@ -11,6 +11,9 @@ __pycache__/
 venv/
 ENV/
 
+# Settings file (contains API keys)
+settings.json
+
 # IDE files
 .vscode/
 .idea/

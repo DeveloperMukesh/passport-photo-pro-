@@ -41,6 +41,13 @@
     <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <span class="text-2xl font-bold text-blue-400">Passport Photo Pro</span>
+        <a href="/settings" class="text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span class="hidden sm:inline">Settings</span>
+        </a>
       </div>
     </nav>
   </header>
@@ -87,6 +94,20 @@
           <button id="toggleAdvanced" class="text-blue-400 hover:text-blue-300 transition-all text-sm">Advanced Options</button>
         </div>
         <div id="advancedOptions" class="hidden bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+          <!-- Paper Size Selector -->
+          <div class="mb-6">
+            <label class="block mb-2 text-sm font-medium text-blue-300">📄 Paper Size</label>
+            <select id="paperSize" class="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+              <option value="4R" selected>4R (4"×6") - Standard photo print</option>
+              <option value="A4">A4 - International standard</option>
+              <option value="Letter">Letter (8.5"×11") - US standard</option>
+              <option value="5R">5R (5"×7") - Medium photo print</option>
+              <option value="6R">6R (6"×8") - Large photo print</option>
+              <option value="3R">3R (3.5"×5") - Small photo print</option>
+            </select>
+            <p class="text-xs text-gray-400 mt-1">Select the paper size for your passport photo sheet</p>
+          </div>
+      
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
             <div>
               <label class="block mb-1 text-sm font-medium">Width (px)</label>
@@ -398,6 +419,7 @@
       formData.append('height', document.getElementById('height').value);
       formData.append('spacing', document.getElementById('spacing').value);
       formData.append('border', document.getElementById('border').value);
+      formData.append('paper_size', document.getElementById('paperSize').value);
       if (skipBgRemoval) {
         formData.append('skip_bg_removal', 'true');
       }
@@ -488,6 +510,7 @@
       btn.disabled = true; btn.textContent = 'Submitting...';
       emailjs.send("service_aoewzsq", "template_hbw13lt", {
         contact, message,
+        to_email: "info@mukeshnath.com.np",
         user_agent: navigator.userAgent,
         time: new Date().toLocaleString()
       }).then(() => {
